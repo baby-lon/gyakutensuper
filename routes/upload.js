@@ -2,6 +2,8 @@ const format = require('util').format;
 const Multer = require('multer');
 const moment = require('moment');
 
+require('dotenv').config();
+
 const multer = Multer({
     storage: Multer.memoryStorage(),
     limits: {
