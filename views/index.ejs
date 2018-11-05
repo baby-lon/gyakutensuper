@@ -1,19 +1,80 @@
 <!DOCTYPE html>
+<html lang="ja">
 <html>
 
 <head>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>
-    upload
+      逆転スーパー
   </title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <link rel='stylesheet' href='/stylesheets/style.css' />
+  <style>
+  </style>
 </head>
 
 <body>
-  <form method="POST" enctype="multipart/form-data" , action="/upload">
-    <input type="file" name="thumbnail">
-    <input type="submit">
-  </form>
+  <div class="container">
+    <div class="receipt">
+      <table class="table receipt">
+        <tbody>
+          <tr>
+            <td>カツ丼</td>
+            <td>¥398</td>
+          </tr>
+          <tr>
+            <td>ごはん3パック</td>
+            <td>¥298</td>
+          </tr>
+          <tr>
+            <td>ビール</td>
+            <td>¥204</td>
+          </tr>
+          <tr>
+            <td>いかげそ</td>
+            <td>¥98</td>
+          </tr>
+          <tr>
+            <td>歯磨き粉</td>
+            <td>¥148</td>
+          </tr>
+          <tr>
+              <td></td>
+              <td id="discount"></td>  
+          </tr>
+          <tr>
+            <td>小計</td>
+            <td>¥1146</td>
+          </tr>
+          <tr></tr>
+          <tr></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="container-payment">
+      <div class="btn btn-payment">お支払い</div>
+    </div>
+  </div>
+  <div class="container-treasurer-back">
+  </div>
+  <div class="container-camera">
+      <video id="video">Video stream not available.</video>
+  </div>
+  <div class="container-treasurer">
+    <div class="btn btn-treasurer" id="treasurer"> お会計</div>
+    <div class="camera">
+      <!-- <form method="POST" enctype="multipart/form-data" , action="/upload">
+        <input type="file" name="thumbnail">
+        <input type="submit">
+      </form>
+      <button id="startbutton">Take photo</button><br> -->
+      <canvas id="canvas" style='display: none'>
+        <textarea id="readStr"></textarea>
+      </canvas>
+    </div>
+  </div>
+  <div id="result"></div>
+  </div>
   <div class="sound hidden">
     <div class="audio">
       <audio id="voice-happy" preload="auto">
@@ -22,16 +83,10 @@
       <audio id="voice-unhappy" preload="auto">
         <source src="https://storage.cloud.google.com/happiness-store.appspot.com/voice/unhappy.mp3" type="audio/mp3">
       </audio>
+      <audio id="voice-neutral" preload="auto">
+        <source src="https://storage.cloud.google.com/happiness-store.appspot.com/voice/neutral.mp3" type="audio/mp3">
+      </audio>
     </div>
-  </div>
-  <div class="camera">
-    <video id="video">Video stream not available.</video>
-  </div>
-  <button id="startbutton">Take photo</button><br>
-  <canvas id="canvas" style = 'display: none'>
-    <textarea id="readStr"></textarea>
-  </canvas>
-  <div id="result"></div>
   </div>
   <script src="javascripts/main.js"></script>
   <script>

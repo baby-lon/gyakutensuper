@@ -18,8 +18,6 @@ function startup() {
     video = document.getElementById('video')
     canvas = document.getElementById('canvas')
     photo = document.getElementById('photo')
-    startbutton = document.getElementById('startbutton')
-
     videoStart()
 
     video.addEventListener('canplay', function (ev) {
@@ -35,13 +33,6 @@ function startup() {
             streaming = true
         }
     }, false)
-
-    // 「take photo」ボタンをとる挙動を定義
-    startbutton.addEventListener('click', function (ev) {
-        takepicture();
-        ev.preventDefault();
-    }, false);
-
     clearphoto();
 }
 
@@ -114,15 +105,23 @@ function send() {
         processData: false,
         contentType: false,
     }).then(res => {
+        console.log(res[0]);
         var resString = JSON.stringify(res[0]);
-        $('#result').text(resString);
+        // $('#result').text(resString);
         var faceResult = res[0];
         var emotion = faceResult.faceAttributes.emotion;
-        if (emotion.happiness < 0.1 && emotion.neutral < 0.5) {
+
+        if (emotion.happiness < 0.1 && emotion.neutral < 0.999) {
             playunhappy();
+            console.log("unhappiness");
         }
-        if (0.8 < emotion.happiness) {
+        else if (0.8 < emotion.happiness) {
             playhappy();
+            console.log("happy");
+        }
+        else {
+            playneutral();
+            console.log("neutral");
         }
     });
 }
@@ -142,12 +141,32 @@ function speech(text) {
 }
 
 function playunhappy() {
-    $("#voice-happy").get(0).pause(); //一時停止
-    $("#voice-happy").get(0).currentTime = 0; //0秒まで巻き戻す
+    $("#voice-happy").get(0).pause();
+    $("#voice-happy").get(0).currentTime = 0;
+    $("#voice-neutral").get(0).pause();
+    $("#voice-neutral").get(0).currentTime = 0;
     $("#voice-unhappy").get(0).play();
 }
 function playhappy() {
-    $("#voice-unhappy").get(0).pause(); //一時停止
-    $("#voice-unhappy").get(0).currentTime = 0; //0秒まで巻き戻す
+    $("#voice-unhappy").get(0).pause();
+    $("#voice-unhappy").get(0).currentTime = 0;
+    $("#voice-neutral").get(0).pause();
+    $("#voice-neutral").get(0).currentTime = 0;
     $("#voice-happy").get(0).play();
 }
+
+function playneutral() {
+    $("#voice-unhappy").get(0).pause();
+    $("#voice-unhappy").get(0).currentTime = 0;
+    $("#voice-happy").get(0).pause();
+    $("#voice-happy").get(0).currentTime = 0;
+    $("#voice-neutral").get(0).play();
+}
+
+$('#treasurer').click(function(ev){
+    $('.container-treasurer').css('display', 'none');
+    $('.container-treasurer-back').css('display', 'none');
+    $('.container-camera').css('display', 'none');
+    takepicture();
+    ev.preventDefault();
+});
