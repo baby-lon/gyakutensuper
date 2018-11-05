@@ -34,9 +34,9 @@ if(process.env.MODE === 'DEVELOP'){
   };
 }
 else{
-  const privateKey = fs.readFileSync(require('os').homedir() + '/etc/letsencrypt/privkey.pem', 'utf8');
-  const certificate = fs.readFileSync(require('os').homedir() + '/etc/letsencrypt/cert.pem', 'utf8');
-  const ca = fs.readFileSync(require('os').homedir() + '/etc/letsencrypt/chain.pem', 'utf8');
+  const privateKey = fs.readFileSync(require('os').homedir() + '/letsencrypt/privkey.pem', 'utf8');
+  const certificate = fs.readFileSync(require('os').homedir() + '/letsencrypt/cert.pem', 'utf8');
+  const ca = fs.readFileSync(require('os').homedir() + '/letsencrypt/chain.pem', 'utf8');
 
   credentials = {
     key: privateKey,
