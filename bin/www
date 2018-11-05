@@ -7,10 +7,29 @@
 var express = require("express");
 var app = require('../app');
 var debug = require('debug')('happiness-store:server');
-var https = require('https');
-var http = require("http");
+var http = require('http');
+var https = require('spdy');
+
+require('dotenv').config();
 
 var fs = require('fs');
+
+var LEX = require('letsencrypt-express').testing();
+var DOMAIN = process.env.DOMAIN;
+var EMAIL = process.env.EMAIL;
+
+var lex = LEX.create({
+  configDir: require('os').homedir() + '/letsencrypt/etc'
+  , approveRegistration: function (hostname, approve) { // leave `null` to disable automatic registration
+    if (hostname === DOMAIN) { // Or check a database or list of allowed domains
+      approve(null, {
+        domains: [DOMAIN]
+        , email: EMAIL
+        , agreeTos: true
+      });
+    }
+  }
+});
 
 /**
  * Get port from environment and store in Express.
@@ -19,19 +38,17 @@ var fs = require('fs');
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
-const sslOptions = {
-  key: fs.readFileSync('./keys/server.key'),
-  cert: fs.readFileSync('./keys/server.crt')
-};
-/**
- * Create HTTP server.
- */
+var server = https.createServer(lex.httpsOptions, LEX.createAcmeResponder(lex, app));
 
-var server = https.createServer(sslOptions, app);
+// リダイレクト用
+function redirectHttp() {
+  http.createServer(LEX.createAcmeResponder(lex, function redirectHttps(req, res) {
+    res.setHeader('Location', 'https://' + req.headers.host + req.url);
+    res.statusCode = 302;
+    res.end('<!-- Hello Developer Person! Please use HTTPS instead -->');
+  })).listen(80);
+}
 
-http.createServer((express()).all("*", function (request, response) {
-  response.redirect(`https://${request.hostname}:${port}${request.url}`);
-})).listen(4000);
 
 /**
  * Listen on provided port, on all network interfaces.
