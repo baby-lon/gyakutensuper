@@ -53,7 +53,7 @@ var server = https.createServer(credentials, app);
 
 http.createServer((express()).all("*", function (request, response) {
   response.redirect(`https://${request.hostname}:${port}${request.url}`);
-})).listen(4000);
+})).listen(process.env.HTTP_PORT);
 
 /**
  * Listen on provided port, on all network interfaces.
