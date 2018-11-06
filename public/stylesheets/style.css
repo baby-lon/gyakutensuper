@@ -73,10 +73,10 @@ td {
   height: 100%;
   width: 100%;
   background: #ffffdd;
-  opacity: 0.9;
+  /* opacity: 0.9; */
   z-index: 10;
-  /* display: block; */
-  display: none;
+  display: block;
+  /* display: none; */
 }
 .container-treasurer {
   height: 40em;
@@ -89,8 +89,8 @@ td {
   left: 50%;
   padding-top: 1em;
   z-index: 12;
-  /* display: block; */
-  display: none;
+  display: block;
+  /* display: none; */
   text-align: center;
 }
 .container-payment {
@@ -108,8 +108,8 @@ td {
   width: -640px;
   margin-top: -12em;
   margin-left: -320px;
-  /* position: fixed; */
-  display: none;
+  position: fixed;
+  /* display: none; */
   top: 50%;
   left: 50%;
 }
