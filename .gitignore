@@ -2,3 +2,4 @@ keys/
 node_modules/
 happiness-store-*.json
 .env
+public/images/aoi

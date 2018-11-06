@@ -112,16 +112,29 @@ function send() {
         var emotion = faceResult.faceAttributes.emotion;
 
         if (emotion.happiness < 0.1 && emotion.neutral < 0.999) {
-            playunhappy();
             console.log("unhappiness");
+            playunhappy();
+            $('#character').attr('src', 'public/images/aoi/sad/open/e.png'); 
+            setTimeout(function(){
+                $('#discount-title').text("割引");
+                $('#discount').text('-50%');
+                var subtotal = $('#subtotal').text();
+                subtotal = parseInt(subtotal);
+                subtotal *= 0.5;
+                $('#subtotal').text(subtotal);
+                var total = Math.floor(subtotal * 1.08);
+                $('#subtotal').text(total);
+            }, 2900);
         }
         else if (0.8 < emotion.happiness) {
-            playhappy();
             console.log("happy");
+            playhappy();
+            $('#character').attr('src', 'images/aoi/happy/open/a.png'); 
         }
         else {
-            playneutral();
             console.log("neutral");
+            playneutral();
+            $('#character').attr('src', 'images/aoi/happy/open/a.png'); 
         }
     });
 }
@@ -170,3 +183,5 @@ $('#treasurer').click(function(ev){
     takepicture();
     ev.preventDefault();
 });
+
+//$('#total')
