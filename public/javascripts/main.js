@@ -119,7 +119,7 @@ function send() {
                 $('#discount-title').text("割引");
                 $('#discount').text('-50%');
                 var subtotal = $('#subtotal').text();
-                subtotal = parseInt(subtotal);
+                subtotal = parseInt(subtotal.replace(/[^0-9]/g, ""));
                 subtotal *= 0.5;
                 $('#subtotal').text(subtotal);
                 var total = Math.floor(subtotal * 1.08);
