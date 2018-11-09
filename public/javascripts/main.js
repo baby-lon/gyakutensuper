@@ -114,7 +114,7 @@ function send() {
         if (emotion.happiness < 0.1 && emotion.neutral < 0.999) {
             console.log("unhappiness");
             playunhappy();
-            $('#character').attr('src', 'public/images/aoi/sad/open/e.png'); 
+            $('#character').attr('src', 'images/aoi/sad/open/e.png'); 
             setTimeout(function(){
                 $('#discount-title').text("割引");
                 $('#discount').text('-50%');
