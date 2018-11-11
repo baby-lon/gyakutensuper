@@ -26,7 +26,7 @@ const bucket = storage.bucket('happiness-store.appspot.com');
 
 
 const reqestFaceDitection = async function(imageUrl){
-    const uriBase = 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect';
+    const uriBase = process.env.FACE_API_URL;
 
     // Request parameters.
     const params = {
