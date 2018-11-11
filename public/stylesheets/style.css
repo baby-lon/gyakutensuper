@@ -127,10 +127,20 @@ td {
 }
 
 .blink-price {
-	animation: target-fade 2s 1;
+	animation: target-fade 3s 1;
+    -webkit-animation: target-fade 3s 1;
+    -moz-animation: target-fade 3s 1;
 }
 
 @keyframes target-fade {
-	0% { font-color: rgb(255, 0, 132); }
-	100% { font: rgb(0, 0, 0); }
+	0% { color: rgb(255, 0, 132); }
+	100% { color: rgb(0, 0, 0); }
+}
+@-webkit-keyframes target-fade {
+    0% { color: rgba(255,0,0,1.0); }
+    100% { color: rgba(0,0,0,1.0); }
+}
+@-moz-keyframes target-fade {
+    0% { color: rgba(255,0,0,1.0); }
+    100% { color: rgba(0,0,0,1.0); }
 }

@@ -106,12 +106,17 @@ function send() {
         contentType: false,
     }).then(res => {
         console.log(res[0]);
-        var resString = JSON.stringify(res[0]);
+	if(res[0]){
+       		 resString = JSON.stringify(res[0]);
+	}
         // $('#result').text(resString);
         var faceResult = res[0];
-        var emotion = faceResult.faceAttributes.emotion;
+	if(!faceResult){
+		faceResult = null;
+	}
+        var emotion = faceResult ? faceResult.faceAttributes.emotion : {};
 
-        if (emotion.happiness < 0.1 && emotion.neutral < 0.999) {
+        if ((emotion.happiness < 0.1 && emotion.neutral < 0.999) || faceResult === null) {
             console.log("unhappiness");
             playunhappy();
             $('#character').attr('src', 'images/aoi/sad/open/e.png'); 
@@ -125,9 +130,12 @@ function send() {
                 var total = Math.floor(subtotal * 1.08);
                 $('#subtotal').text(total);
                 setTimeout(function(){
-                    $('#disconunt-title').addClass('blink-price');
-                    $('#disconunt').addClass('blink-price');
+                    $('#discount-title').addClass('blink-price');
+                    $('#discount').addClass('blink-price');
+		    $('#subtotal-title').addClass('blink-price');
                     $('#subtotal').addClass('blink-price');
+		    $('#total-title').addClass('blink-price');
+		    $('#total').addClass('blink-price');
                 },10);
             }, 2900);
         }
