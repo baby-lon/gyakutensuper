@@ -125,3 +125,12 @@ td {
   text-align: right;
   margin: 1em auto auto auto;
 }
+
+.blink-price {
+	animation: target-fade 2s 1;
+}
+
+@keyframes target-fade {
+	0% { font-color: rgb(255, 0, 132); }
+	100% { font: rgb(0, 0, 0); }
+}

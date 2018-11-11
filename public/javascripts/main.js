@@ -124,6 +124,9 @@ function send() {
                 $('#subtotal').text(subtotal);
                 var total = Math.floor(subtotal * 1.08);
                 $('#subtotal').text(total);
+                $('#disconunt-title').addClass('blink-price');
+                $('#disconunt').addClass('blink-price');
+                $('#subtotal').addClass('blink-price');
             }, 2900);
         }
         else if (0.8 < emotion.happiness) {
