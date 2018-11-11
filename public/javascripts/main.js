@@ -139,6 +139,14 @@ function send() {
     });
 }
 
+$('#btn-payment').click(function(){
+    playthankyou();
+    $('#character').attr('src', 'images/aoi/normal/open/u.png');
+    setTimeout(function(){
+        location.reload();
+    }, 2000);
+});
+
 function speech(text) {
     var param = {
         text: 'text',
@@ -153,27 +161,32 @@ function speech(text) {
     });
 }
 
-function playunhappy() {
+function stopall(){
+    $("#voice-unhappy").get(0).pause();
+    $("#voice-unhappy").get(0).currentTime = 0;
     $("#voice-happy").get(0).pause();
     $("#voice-happy").get(0).currentTime = 0;
     $("#voice-neutral").get(0).pause();
     $("#voice-neutral").get(0).currentTime = 0;
+}
+
+function playunhappy() {
+    stopall();
     $("#voice-unhappy").get(0).play();
 }
 function playhappy() {
-    $("#voice-unhappy").get(0).pause();
-    $("#voice-unhappy").get(0).currentTime = 0;
-    $("#voice-neutral").get(0).pause();
-    $("#voice-neutral").get(0).currentTime = 0;
+    stopall();
     $("#voice-happy").get(0).play();
 }
 
 function playneutral() {
-    $("#voice-unhappy").get(0).pause();
-    $("#voice-unhappy").get(0).currentTime = 0;
-    $("#voice-happy").get(0).pause();
-    $("#voice-happy").get(0).currentTime = 0;
+    stopall();
     $("#voice-neutral").get(0).play();
+}
+
+function playthankyou(){
+    stopall();
+    $("#voice-thankyou").get(0).play();
 }
 
 $('#treasurer').click(function(ev){
@@ -184,4 +197,3 @@ $('#treasurer').click(function(ev){
     ev.preventDefault();
 });
 
-//$('#total')
